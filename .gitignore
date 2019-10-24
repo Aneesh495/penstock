@@ -1,0 +1,28 @@
+# Build and object files
+build/
+bin/
+*.o
+*.a
+*.so
+*.dylib
+*.out
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+*.egg-info/
+dist/
+
+# Output and temp files
+work/
+output/
+*.log
+*.tmp
+.DS_Store
+
+# Benchmark and profiling results
+benchmarks/*.prof
+benchmarks/*.dat
