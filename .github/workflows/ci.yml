@@ -1,0 +1,38 @@
+name: Penstock CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Compile native libraries and test runner
+      run: |
+        make all
+
+    - name: Execute test suites
+      run: |
+        make test
+
+    - name: Verify zero em dash violations
+      run: |
+        make verify
+
+    - name: Run performance benchmarks
+      run: |
+        make bench
