@@ -155,6 +155,10 @@ penstock_transient_result_t* penstock_solve_transient(penstock_network_t* net,
                                                      const penstock_steady_result_t* initial_state);
 void penstock_transient_result_free(penstock_transient_result_t* res);
 
+/* Four-quadrant centrifugal pump Suter curve transformations */
+double penstock_suter_wh(double theta);
+double penstock_suter_wb(double theta);
+
 #ifdef __cplusplus
 }
 #endif
