@@ -1,5 +1,8 @@
 import math
-from .visualizer import render_ascii_oscilloscope, render_hgl_profile
+try:
+    from .visualizer import render_ascii_oscilloscope, render_hgl_profile
+except ImportError:
+    from visualizer import render_ascii_oscilloscope, render_hgl_profile
 
 class SimulationRunner:
     def __init__(self, bindings=None):
