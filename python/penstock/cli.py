@@ -1,8 +1,15 @@
 import sys
 import argparse
-from .bindings import PenstockBindings
-from .runner import SimulationRunner
-from .visualizer import render_ascii_oscilloscope, render_hgl_profile
+try:
+    from .bindings import PenstockBindings
+    from .runner import SimulationRunner
+    from .visualizer import render_ascii_oscilloscope, render_hgl_profile
+except ImportError:
+    import sys, os
+    sys.path.insert(0, os.path.dirname(__file__))
+    from bindings import PenstockBindings
+    from runner import SimulationRunner
+    from visualizer import render_ascii_oscilloscope, render_hgl_profile
 
 def main():
     parser = argparse.ArgumentParser(description="Penstock Municipal Hydraulic & Transient Simulator")
