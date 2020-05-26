@@ -1,0 +1,46 @@
+[TITLE]
+Two-Reservoir Gravity Transmission Main with Fast-Acting Downstream Valve
+
+[JUNCTIONS]
+;ID              Elev        Demand      Pattern
+J1               120.0       0.0         ;
+J2               100.0       0.05        ;
+J3               80.0        0.05        ;
+J4               60.0        0.10        ;
+
+[RESERVOIRS]
+;ID              Head        Pattern
+R1               200.0       ; Upstream mountain reservoir
+R2               180.0       ; Secondary balancing reservoir
+
+[TANKS]
+;ID              Elev        InitLvl     MinLvl      MaxLvl      Diam        MinVol      VolCurve
+
+[PIPES]
+;ID              Node1       Node2       Length      Diam        Roughness   MinorLoss   Status
+P1               R1          J1          2000.0      600.0       0.045       0.5         OPEN
+P2               J1          J2          1500.0      500.0       0.045       0.2         OPEN
+P3               J2          J3          1200.0      400.0       0.045       0.2         OPEN
+P4               J3          J4          1000.0      400.0       0.045       1.0         OPEN
+P5               R2          J2          1800.0      450.0       0.045       0.5         OPEN
+
+[VALVES]
+;ID              Node1       Node2       Diam        Type    Setting     MinorLoss
+TCV1             J3          J4          400.0       TCV     0.0         0.0
+
+[OPTIONS]
+Units            LPS
+Headloss         D-W
+Specific Gravity 1.0
+Viscosity        1.0
+Trials           40
+Accuracy         0.001
+CHECKFREQ        2
+MAXCHECK         10
+DAMPLIMIT        0
+Unbalanced       Continue 10
+Pattern          1
+Demand Multiplier 1.0
+Emitter Exponent 0.5
+
+[END]
