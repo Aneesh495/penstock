@@ -1,0 +1,38 @@
+[TITLE]
+High-Head Pumping Station with Hydropneumatic Surge Vessel Protection
+
+[JUNCTIONS]
+;ID              Elev        Demand      Pattern
+J_SUCTION        10.0        0.0         ;
+J_DISCHARGE      12.0        0.0         ;
+J_AIR_VESSEL     15.0        0.0         ;
+J_SUMMIT         85.0        0.02        ;
+J_DELIVERY       40.0        0.25        ;
+
+[RESERVOIRS]
+;ID              Head        Pattern
+R_CLEARWELL      15.0        ; Treatment plant clearwell
+
+[TANKS]
+;ID              Elev        InitLvl     MinLvl      MaxLvl      Diam        MinVol      VolCurve
+T_TERMINAL       40.0        5.0         1.0         12.0        30.0        0.0         ;
+
+[PIPES]
+;ID              Node1       Node2       Length      Diam        Roughness   MinorLoss   Status
+P_SUCT           R_CLEARWELL J_SUCTION   50.0        600.0       0.02        1.5         OPEN
+P_DISCH          J_DISCHARGE J_AIR_VESSEL 20.0       500.0       0.02        2.0         OPEN
+P_MAIN1          J_AIR_VESSEL J_SUMMIT   3500.0      500.0       0.03        1.0         OPEN
+P_MAIN2          J_SUMMIT    J_DELIVERY  2500.0      500.0       0.03        1.0         OPEN
+P_INLET          J_DELIVERY  T_TERMINAL  100.0       500.0       0.02        1.0         OPEN
+
+[PUMPS]
+;ID              Node1       Node2       Parameters
+PUMP1            J_SUCTION   J_DISCHARGE HEAD 95.0 0.30 82.0
+
+[OPTIONS]
+Units            LPS
+Headloss         D-W
+Trials           50
+Accuracy         0.001
+
+[END]
