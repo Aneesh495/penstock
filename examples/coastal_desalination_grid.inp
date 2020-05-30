@@ -1,0 +1,39 @@
+[TITLE]
+Coastal Seawater Reverse Osmosis (SWRO) Distribution Grid with Booster Stations
+
+[JUNCTIONS]
+;ID              Elev        Demand      Pattern
+J_SWRO           5.0         0.0         ;
+J_BOOSTER        8.0         0.0         ;
+J_COASTAL_IND    12.0        0.15        ;
+J_URBAN_CORE     25.0        0.20        ;
+J_ELEVATED_ZONE  60.0        0.10        ;
+
+[RESERVOIRS]
+;ID              Head        Pattern
+R_DESAL_PLANT    20.0        ; Desalination permeate storage tank
+
+[TANKS]
+;ID              Elev        InitLvl     MinLvl      MaxLvl      Diam        MinVol      VolCurve
+T_URBAN_HIGH     60.0        4.0         1.0         10.0        25.0        0.0         ;
+
+[PIPES]
+;ID              Node1       Node2       Length      Diam        Roughness   MinorLoss   Status
+P_FEED           R_DESAL_PLANT J_SWRO    200.0       600.0       0.02        0.5         OPEN
+P_INTER          J_SWRO      J_BOOSTER   1000.0      500.0       0.02        0.5         OPEN
+P_IND            J_BOOSTER   J_COASTAL_IND 1500.0    400.0       0.03        1.0         OPEN
+P_URBAN          J_BOOSTER   J_URBAN_CORE  2200.0    450.0       0.03        1.0         OPEN
+P_HIGH_LIFT      J_URBAN_CORE J_ELEVATED_ZONE 3000.0 350.0       0.03        1.5         OPEN
+P_TANK_IN        J_ELEVATED_ZONE T_URBAN_HIGH 150.0  350.0       0.02        0.5         OPEN
+
+[PUMPS]
+;ID              Node1       Node2       Parameters
+PUMP_BOOST       J_SWRO      J_BOOSTER   HEAD 70.0 0.45 55.0
+
+[OPTIONS]
+Units            LPS
+Headloss         D-W
+Trials           40
+Accuracy         0.001
+
+[END]
